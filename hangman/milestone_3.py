@@ -1,20 +1,22 @@
 #%%
 import milestone_2
 
-# Takes in user input, checks if guess matches conditions to pass as a valid guess
-#calls check_guess function to check if the letter is in the word
 def ask_for_input():
+    random_word = milestone_2.get_random_word()
+    guessed_letters = set()
     while True:
         guess = input("Guess a letter: ").lower()
         if len(guess) == 1 and guess.isalpha():
-            check_guess(guess)
-            break
+            if guess in guessed_letters:
+                print(f"You have already guessed {guess}, try a different letter...")
+            else:
+                guessed_letters.add(guess)
+                check_guess(guess, random_word)
         else:
             print("Invalid input. Please enter a single alphabetical character.")
 
-#function to check if the letter input by the user is in the word. 
-def check_guess(guess):
-    if guess in milestone_2.random_word:
+def check_guess(guess, random_word):
+    if guess in random_word:
         print(f"Good guess! '{guess}' is in the word.")
     else:
         print(f"Sorry, '{guess}' is not in the word. Try again.")
