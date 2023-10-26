@@ -61,15 +61,15 @@ class Hangman():
         letter: str 
             The input letter being checked.
         '''
-        letter = letter.lower()  # Convert the letter to lowercase
+        letter = letter.lower()  
         if letter not in self.list_of_guesses:
-            self.list_of_guesses.append(letter)  # Add the letter to the list of letters tried
+            self.list_of_guesses.append(letter) 
             if letter in self.num_letters:
                 print(f"Good guess! {letter} is in the word")
                 for i, letter_in_word in enumerate(self.word):
                     if letter_in_word == letter:
                         self.word_guessed[i] = letter
-                self.num_letters.remove(letter)  # Remove the guessed letter from the set of unique letters
+                self.num_letters.remove(letter)  
                 print(f"Guess: {' '.join(self.word_guessed)}")
             else:
                 self.num_lives -= 1
@@ -98,7 +98,7 @@ class Hangman():
 
 def play_game(word_list):
     '''
-    Instantiate an instance of the game.
+    Instantiate an instance of the game. Call this method to begin playing Hangman!.
     '''
     game = Hangman(word_list, num_lives=5)
     while game.num_lives > 0 and game.num_letters:
@@ -107,6 +107,7 @@ def play_game(word_list):
         print("You lost! The word was", game.word)
     else:
         print("Congratulations, You won the game!")
+        print(f"The word was {game.word}")
 
 if __name__ == '__main__':
     word_list = ['apple', 'banana', 'orange', 'pear', 'strawberry', 'watermelon', 'mango']
