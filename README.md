@@ -6,6 +6,7 @@
  Hangman is a classic game in which a player thinks of a word and the other player tries to guess that word within a certain amount of attempts.
 
 This look familiar?: 
+
  ![you may remember something like this from your childhood](assets/hangman_drawing.jpeg)
  
 ### __What is this project?__
