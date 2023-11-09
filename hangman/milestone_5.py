@@ -1,6 +1,7 @@
 #%%
 import random
 
+
 class Hangman():
     '''
     Hangman game that will ask for the user for a letter and checks it against the 
@@ -44,9 +45,9 @@ class Hangman():
         self.num_lives = num_lives
         self.word = random.choice(word_list)
         self.word_guessed = ['_' for _ in range(len(self.word))]
-        self.num_letters = set(self.word)
+        self.set_of_letters_in_word = set(self.word)
         self.list_of_guesses = []
-        print(f"The mystery word has {len(self.num_letters)} characters")
+        print(f"The mystery word has {len(self.set_of_letters_in_word)} characters")
         print(self.word_guessed)
 
     def check_letter(self, letter):
@@ -64,12 +65,13 @@ class Hangman():
         letter = letter.lower()  
         if letter not in self.list_of_guesses:
             self.list_of_guesses.append(letter) 
-            if letter in self.num_letters:
+            
+            if letter in self.set_of_letters_in_word :
                 print(f"Good guess! {letter} is in the word")
                 for i, letter_in_word in enumerate(self.word):
                     if letter_in_word == letter:
                         self.word_guessed[i] = letter
-                self.num_letters.remove(letter)  
+                self.set_of_letters_in_word .remove(letter)  
                 print(f"Guess: {' '.join(self.word_guessed)}")
             else:
                 self.num_lives -= 1
@@ -88,11 +90,8 @@ class Hangman():
         while True:
             letter = input("Guess a letter: ").lower()
             if len(letter) == 1 and letter.isalpha():
-                if letter not in self.list_of_guesses:
                     self.check_letter(letter)
                     break
-                else:
-                    print(f"You have already guessed '{letter}', try a different letter...")
             else:
                 print("Invalid input. Please enter a single alphabetical character.")
 
@@ -100,8 +99,10 @@ def play_game(word_list):
     '''
     Instantiate an instance of the game. Call this method to begin playing Hangman!.
     '''
-    game = Hangman(word_list, num_lives=5)
-    while game.num_lives > 0 and game.num_letters:
+    num_lives = int(input("Enter the number of lives you would like to play with: "))
+    game = Hangman(word_list, num_lives)
+    
+    while game.num_lives > 0 and game.set_of_letters_in_word:
         game.ask_for_input()
     if game.num_lives == 0:
         print("You lost! The word was", game.word)
